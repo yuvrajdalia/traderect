@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title > <%= subcat_name %> </title>
+  <% include partials/css_headstyles.ejs %>
+</head>
+
+<body>
+  <% include partials/header.ejs %>
+  <% include partials/account_icon.ejs %>
+  <% include partials/submitadd_icon.ejs %>
+  <% include partials/searchbar.ejs %>
+
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">PRODUCTS</h1>
+      <p>
+         <% subcat_name.products.forEach(function(item){ %>
+     <li>
+       <% item.product_name %>
+     </li>
+ <% }) %>
+      </p>
+    </div>
+  </div>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <% include partials/footer.ejs %>
+
+  </body>
+  </html>
