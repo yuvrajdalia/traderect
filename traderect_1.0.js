@@ -15,11 +15,13 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use('/', express.static('assests')); //middleware for handling .css file request
 
+var catRouter = require('./routes/category');
 
+//home routing
 app.get('/', function(req, res){
   Categories.find({},function(err,cats){
     if(err){console.log(err);}
-  res.render('home',{cats:cats});
+  res.render('home',{cats : cats});
     });
 });
 
@@ -27,25 +29,34 @@ app.get('/contact', function(req, res){
   res.render('contact_us');
 });
 
-app.get('/categories/:category',function(req,res){
-    var category = req.params.category;
-    var myCursor = Categories.find({cat_name: category}, (err, result) => {
+//category routing
+app.use('/categories', catRouter);
+//
+
+//main routings
+app.get('/cats', (req, res) => {
+  Categories.find({}, (err, cats) => {
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('category_page', {cats: cats});
+    }
+  })
+})
+
+app.get('/cats/:catName',function(req,res){
+    var catName = req.params.catName;
+    Categories.findOne({ cat_name : catName}, (err, cat) => {
       if(err){
         console.log(err);
       }
-      else if(result == 'NULL' || result == ''){
-        res.render('pnf');
-      }
+
       else{
-        Categories.find({cat_name: "cat_name"}, (err, result) => {
-          var subcats = result.subcats;
-        });
-        res.render('category_page',{ cat_name: cat_name, subcats: subcats  });
+          res.render('products_page', { catObject : cat });
       }
     });
 });
-//render subcat page
-//app.get('/categoies/') dont know how to set route about the url "/categories/subcategory/"
 
 app.get('*', function (req, res){
   res.render('pnf');

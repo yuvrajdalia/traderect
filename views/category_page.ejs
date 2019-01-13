@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title > <%= cat_name %> </title>
+  <title > Categories </title>
   <% include partials/css_headstyles.ejs %>
 </head>
 
@@ -14,11 +14,11 @@
 
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">SUB-CATEGORIES</h1>
+      <h1 class="display-4">CATEGORIES</h1>
       <p>
-         <% subcats.forEach(function(subcat){ %>
+         <% cats.forEach(function(cat){ %>
      <li>
-       <a href="/categories/<%= subcat %>/"> <%= subcat %> </a>
+       <a href="/cats/<%= cat.cat_name %>/"> <%= cat.cat_name %> </a>
      </li>
  <% }) %>
       </p>

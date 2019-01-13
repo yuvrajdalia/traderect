@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title > <%= subcat_name %> </title>
+  <title > <%= catObject.cat_name %></title>
   <% include partials/css_headstyles.ejs %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 
 <body>
@@ -14,20 +16,19 @@
 
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">PRODUCTS</h1>
+      <h1 class="display-4"><%= catObject.cat_name %> Products</h1>
       <p>
-         <% subcat_name.products.forEach(function(item){ %>
+         <%  catObject.products.forEach((product) => { %>
      <li>
-       <% item.product_name %>
+        <%= product.product_name %>
      </li>
- <% }) %>
+ <% }); %>
       </p>
     </div>
   </div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <% include partials/footer.ejs %>
 
