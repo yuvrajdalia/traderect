@@ -10,13 +10,15 @@ catRouter.use(bodyParser.json());
 catRouter.route('/')
 .get((req,res,next) => {
 
-  Categories.find({})
-  .then((cat) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(cat);
-  }, (err) => next(err))
-    .catch((err) => next(err));
+  let promise = Categories.find({})
+      .then((cats) => {
+          res.statusCode = 200;
+          //res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          //res.json(cat);
+          //res.set('Content-Type', 'text/html');
+          res.render('category_page.ejs',{cats:cats});
+      }, (err) => next(err))
+      .catch((err) => next(err));
 })
 .post((req,res,next) => {
   
@@ -50,10 +52,12 @@ catRouter.route('/:catId')
 .get((req,res,next) => {
 
   Categories.findById(req.params.catId)
-  .then((cat) => {
+  .then((cats) => {
     res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(cat);
+    //res.setHeader('Content-Type', 'application/json');
+    //res.json(cat);
+      res.set('Content-Type', 'text/html');
+    res.render('products_page.ejs',{cats:cats});
   }, (err) => next(err))
     .catch((err) => next(err));
 })

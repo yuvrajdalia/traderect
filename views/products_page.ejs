@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title > <%= catObject.cat_name %></title>
+  <title > <%= cats.cat_name %></title>
   <% include partials/css_headstyles.ejs %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,9 +16,9 @@
 
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4"><%= catObject.cat_name %> Products</h1>
+      <h1 class="display-4"><%= cats.cat_name %> Products</h1>
       <p>
-         <%  catObject.products.forEach((product) => { %>
+         <%  cats.products.forEach((product) => { %>
      <li>
         <%= product.product_name %>
      </li>
